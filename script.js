@@ -32,9 +32,9 @@ document.addEventListener('DOMContentLoaded', () => {
         { name: "アアル村", x: 50, y: 13, event: "好きな魔神・伝説任務は？" }, // 12
         { name: "ウェネトトンネル", x: 35.4, y: 13, event: "現在のキャラで通常攻撃を一発振り、会心だったら3マス進む" , special: "conditional_move", condition_value: 3 }, // 13
         { name: "ロマリタイムハーバー", x: 26, y: 35.2, event: "原神を始めたきっかけは？」" }, // 14
-        { name: "フォンテーヌ廷", x: 26, y: 63.9, event: "「一番使っているキャラは？」" }, // 15
+        { name: "フォンテーヌ廷", x: 26, y: 63.9, event: "今までで一番の神引きは？" }, // 15
         { name: "ペトリコール", x: 43, y: 63.9, event: "他にハマっているゲームは？" }, // 16
-        { name: "こだまの子", x: 43, y: 37, event: "「あなたの推しについて教えて！」" }, // 17
+        { name: "こだまの子", x: 43, y: 37, event: "限定キャラが一体貰えるなら誰が欲しい？" }, // 17
         { name: "流泉の衆", x: 60, y: 37, event: "自慢の聖遺物があれば見せてください！" }, // 18
         { name: "懸木の民", x: 60, y: 63.9, event: "神の目が貰えるなら何元素がいい？" }, // 19
         { name: "ゴール（メロピデ要塞）", x: 80.7, y: 57.4, event: "ゴール！おめでとう！", goal: true } // 20
@@ -102,7 +102,7 @@ document.addEventListener('DOMContentLoaded', () => {
             playerPositions[currentPlayer - 1] = newPositionIndex;
             updatePlayerPiecePosition(currentPlayer - 1);
             updateGameInfo();
-            eventMessageDisplay.textContent = `プレイヤー${currentPlayer}が${squares[newPositionIndex].name}に到着！ ${squares[newPositionIndex].event}`;
+            eventMessageDisplay.textContent = `プレイヤー${currentPlayer}が${squares[newPositionIndex].name}に到着！「${squares[newPositionIndex].event}」`;
             rollDiceButton.disabled = true; // ゲーム終了
             alert(`プレイヤー${currentPlayer}の勝利です！おめでとうございます！`);
             // ここでゲーム終了後の処理（例：リセットボタン表示など）を追加できます
@@ -134,19 +134,19 @@ document.addEventListener('DOMContentLoaded', () => {
             ];
             const randomMessage = messages[Math.floor(Math.random() * messages.length)];
 
-            const confirmResult = confirm(`${randomMessage}\nOK: ${playerNames[overlappingPlayerIndex]}さんが2マス進む\nキャンセル: ${playerNames[currentPlayer - 1]} (${playerNames[currentPlayer - 1]}) が2マス進む`);
+            const confirmResult = confirm(`${randomMessage}\nOK: ${playerNames[overlappingPlayerIndex]}さんが2マス進む\nキャンセル: ${playerNames[currentPlayer - 1]}が2マス進む`);
 
             if (confirmResult) {
                 const nextPosition = Math.min(playerPositions[overlappingPlayerIndex] + 2, squares.length - 1);
                 playerPositions[overlappingPlayerIndex] = nextPosition;
                 updatePlayerPiecePosition(overlappingPlayerIndex);
-                eventMessageDisplay.textContent += `\n${playerNames[overlappingPlayerIndex]}さんが2マス進みました。`;
+                eventMessageDisplay.textContent += `\n${playerNames[overlappingPlayerIndex]}が2マス進みました。`;
                 handleSquareEvent(nextPosition);
             } else {
                 const nextPosition = Math.min(playerPositions[currentPlayer - 1] + 2, squares.length - 1);
                 playerPositions[currentPlayer - 1] = nextPosition;
                 updatePlayerPiecePosition(currentPlayer - 1);
-                eventMessageDisplay.textContent += `\n${playerNames[currentPlayer - 1]} (${playerNames[currentPlayer - 1]}) が2マス進みました。`;
+                eventMessageDisplay.textContent += `\n${playerNames[currentPlayer - 1]} が2マス進みました。`;
                 handleSquareEvent(nextPosition);
             }
         } else if (square.special === "conditional_move") {
