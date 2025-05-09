@@ -163,7 +163,7 @@ document.addEventListener('DOMContentLoaded', () => {
         "秘源機兵・統御デバイス"
             ];
             const currentPlayerNextPos = playerPositions[currentPlayer - 1] + 2;
-            const overlappingPlayerNextPos = playerPositions[overlappingPlayerIndex] + 2;
+            const overlappingPlayerNextPos = playerPositions[overlappingPlayerIndex] + 1;
             const goalIndex = squares.length - 1;
             if (currentPlayerNextPos <= goalIndex && overlappingPlayerNextPos <= goalIndex && playerPositions[currentPlayer - 1] != 0 && playerPositions[overlappingPlayerIndex] != 0) {
                     // 二人ともゴールから2マス以内でなければ
@@ -177,9 +177,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
                     playerPositions[overlappingPlayerIndex] = overlappingPlayerNextPos;
                     updatePlayerPiecePosition(overlappingPlayerIndex);
-                    handleSquareEvent(overlappingPlayerNextPos); // 移動先のイベントを処理
 
-                    eventMessageDisplay.textContent += `\n${playerNames[currentPlayer - 1]}さんと${playerNames[overlappingPlayerIndex]}さんが2マス進みました。`;
+                    eventMessageDisplay.textContent += `\n${playerNames[currentPlayer - 1]}さんが2マス、${playerNames[overlappingPlayerIndex]}さんが1マス進みました。`;
             } else {
                 // キャンセルなら何も起こらない
                 eventMessageDisplay.textContent += "\n何も起こりませんでした。";
