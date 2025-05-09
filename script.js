@@ -112,11 +112,10 @@ document.addEventListener('DOMContentLoaded', () => {
         playerPositions[currentPlayer - 1] = newPositionIndex;
         updatePlayerPiecePosition(currentPlayer - 1);
         updateGameInfo();
-
+       handleSquareEvent(newPositionIndex);
         // 次のプレイヤーへ
         currentPlayer = (currentPlayer % numPlayers) + 1;
         updateGameInfo(); // 次のプレイヤー情報を更新
-        handleSquareEvent(newPositionIndex);
     }
 
     // マスのイベント処理
