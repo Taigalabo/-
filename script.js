@@ -146,26 +146,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const piece = playerPieces[playerIndex];
 
         if (square && piece) {
-            // 盤面画像の実際の表示サイズを取得
-            const boardRect = boardImage.getBoundingClientRect();
-            const boardDisplayWidth = boardRect.width;
-            const boardDisplayHeight = boardRect.height;
-
-            // 画像の元々のサイズ (CSSで指定している場合や、img要素のnaturalWidthなどから取得)
-            // ここでは簡略化のため、CSSで指定した幅を基準にするか、
-            // もしくは画像が読み込まれた後に naturalWidth, naturalHeight を使うのが確実です。
-            // 今回はCSSの .game-board-container の幅を基準にします。
-            const containerWidth = gameBoardContainer.offsetWidth;
-
-
-            // 割合で位置を計算
-               // 変更後 (script.js の updatePlayerPiecePosition 関数内の一部)
-    function updatePlayerPiecePosition(playerIndex) {
-        const squareIndex = playerPositions[playerIndex];
-        const square = squares[squareIndex];
-        const piece = playerPieces[playerIndex];
-
-        if (square && piece) {
             // コマの現在の実際の幅と高さを取得
             const pieceWidth = piece.offsetWidth;
             const pieceHeight = piece.offsetHeight;
@@ -199,38 +179,6 @@ document.addEventListener('DOMContentLoaded', () => {
             piece.style.transform = `translate(${transformX}px, ${transformY}px)`;
         }
     }
-    }
-
-    // 初期状態ではサイコロボタンを無効化
-    rollDiceButton.disabled = true;
-});
-
-
-
-            // 複数のコマが同じマスにいる場合のオフセット（簡易版）
-            // 同じマスにいる他のプレイヤーを探し、少しずらして表示
-            let offsetMagnitude = 5; // ずらす量（ピクセル）
-            let overlapCount = 0;
-            for (let i = 0; i < numPlayers; i++) {
-                if (i !== playerIndex && playerPositions[i] === squareIndex) {
-                    overlapCount++;
-                    // 簡単な例として、プレイヤー番号によって少し位置をずらす
-                    // より洗練された方法としては、円形に配置するなどがあります
-                    switch(playerIndex % 4) {
-                        case 0: piece.style.transform = `translate(${offsetMagnitude * overlapCount}px, ${offsetMagnitude * overlapCount}px)`; break;
-                        case 1: piece.style.transform = `translate(-${offsetMagnitude * overlapCount}px, ${offsetMagnitude * overlapCount}px)`; break;
-                        case 2: piece.style.transform = `translate(${offsetMagnitude * overlapCount}px, -${offsetMagnitude * overlapCount}px)`; break;
-                        case 3: piece.style.transform = `translate(-${offsetMagnitude * overlapCount}px, -${offsetMagnitude * overlapCount}px)`; break;
-                    }
-                }
-            }
-            if (overlapCount === 0) {
-                 piece.style.transform = 'translate(0,0)'; // 重なりがなければリセット
-            }
-
-        }
-    }
-
 
     // ゲーム情報を更新
     function updateGameInfo() {
