@@ -184,11 +184,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 // キャンセルなら何も起こらない
                 eventMessageDisplay.textContent += "\n何も起こりませんでした。";
             }
-            }  
+            }
             else {
                     eventMessageDisplay.textContent += "\n遭遇しましたが、ゴール手前のため何も起こりません。";
             }
-         else if (square.special === "conditional_move") {
+         if (square.special === "conditional_move") {
             // (conditional_move の処理はそのまま)
             const criticalHit = confirm("会心が出ましたか？ (OK = はい / キャンセル = いいえ)");
             if (criticalHit) {
