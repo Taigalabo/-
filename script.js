@@ -124,7 +124,20 @@ document.addEventListener('DOMContentLoaded', () => {
         eventMessageDisplay.textContent = `プレイヤー${currentPlayer} (${playerNames[currentPlayer - 1]}) が${square.name}に止まりました。 \n 「${square.event || ''}」`;
 
         const overlappingPlayerIndex = playerPositions.findIndex((pos, index) => index !== currentPlayer - 1 && pos === squareIndex);
-
+        if (square.special === "conditional_move") {
+            // (conditional_move の処理はそのまま)
+            const criticalHit = confirm("会心が出ましたか？ (OK = はい / キャンセル = いいえ)");
+            if (criticalHit) {
+                eventMessageDisplay.textContent += ` 会心が出た！${square.condition_value}マス進みます。`;
+                let currentPositionIndex = playerPositions[currentPlayer - 1];
+                let newPositionIndex = Math.min(currentPositionIndex + square.condition_value, squares.length - 1);
+                playerPositions[currentPlayer - 1] = newPositionIndex;
+                updatePlayerPiecePosition(currentPlayer - 1);
+                handleSquareEvent(newPositionIndex);
+            } else {
+                eventMessageDisplay.textContent += " 会心は出ませんでした。";
+            }
+        }
         if (overlappingPlayerIndex !== -1000) {
             const messages = [
         "純水精霊",
@@ -186,20 +199,6 @@ document.addEventListener('DOMContentLoaded', () => {
             else {
                     eventMessageDisplay.textContent += "\n遭遇しましたが、ゴール手前のため何も起こりません。";
             }
-         if (square.special === "conditional_move") {
-            // (conditional_move の処理はそのまま)
-            const criticalHit = confirm("会心が出ましたか？ (OK = はい / キャンセル = いいえ)");
-            if (criticalHit) {
-                eventMessageDisplay.textContent += ` 会心が出た！${square.condition_value}マス進みます。`;
-                let currentPositionIndex = playerPositions[currentPlayer - 1];
-                let newPositionIndex = Math.min(currentPositionIndex + square.condition_value, squares.length - 1);
-                playerPositions[currentPlayer - 1] = newPositionIndex;
-                updatePlayerPiecePosition(currentPlayer - 1);
-                handleSquareEvent(newPositionIndex);
-            } else {
-                eventMessageDisplay.textContent += " 会心は出ませんでした。";
-            }
-        }
         // 他の特殊イベントもここに追加
     }
     }
