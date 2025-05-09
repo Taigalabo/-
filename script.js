@@ -141,13 +141,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 playerPositions[overlappingPlayerIndex] = nextPosition;
                 updatePlayerPiecePosition(overlappingPlayerIndex);
                 eventMessageDisplay.textContent += `\n${playerNames[overlappingPlayerIndex]}が2マス進みました。`;
-                handleSquareEvent(nextPosition);
             } else {
                 const nextPosition = Math.min(playerPositions[currentPlayer - 1] + 2, squares.length - 1);
                 playerPositions[currentPlayer - 1] = nextPosition;
                 updatePlayerPiecePosition(currentPlayer - 1);
                 eventMessageDisplay.textContent += `\n${playerNames[currentPlayer - 1]} が2マス進みました。`;
-                handleSquareEvent(nextPosition);
             }
         } else if (square.special === "conditional_move") {
             // (conditional_move の処理はそのまま)
