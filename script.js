@@ -85,7 +85,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // サイコロを振る処理
     rollDiceButton.addEventListener('click', () => {
-        const diceRoll = Math.floor(Math.random() * 6) + 1;
+        const diceRoll = Math.floor(Math.random() * 10) + 1;
         diceResultDisplay.textContent = diceRoll;
 
         movePlayer(diceRoll);
@@ -126,7 +126,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const overlappingPlayerIndex = playerPositions.findIndex((pos, index) => index !== currentPlayer - 1 && pos === squareIndex);
         if (square.special === "conditional_move") {
             // (conditional_move の処理はそのまま)
-            const criticalHit = confirm("会心が出ましたか？ (OK = はい / キャンセル = いいえ)");
+            const criticalHit = confirm("ウェネトトンネル！会心が出ましたか？ (OK = はい / キャンセル = いいえ)");
             if (criticalHit) {
                 eventMessageDisplay.textContent += ` 会心が出た！${square.condition_value}マス進みます。`;
                 let currentPositionIndex = playerPositions[currentPlayer - 1];
