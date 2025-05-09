@@ -138,6 +138,68 @@ document.addEventListener('DOMContentLoaded', () => {
                 eventMessageDisplay.textContent += " 会心は出ませんでした。";
             }
         }
+        if (overlappingPlayerIndex !== -1) {
+            const messages = [
+                "純水精霊",
+                "エンシェントヴィシャップ",
+                "無相の氷",
+                "魔偶剣鬼",
+                "無相の炎",
+                "恒常からくり陣形",
+                "無相の水",
+                "雷音権現",
+                "黄金王獣",
+                "アビサルヴィシャップの群れ",
+                "遺跡サーペント",
+                "迅電樹",
+                "マッシュラプトル",
+                "兆載永劫ドレイク",
+                "半永久統制マトリックス",
+                "無相の草",
+                "風蝕ウェネト",
+                "深罪の浸礼者",
+                "氷風組曲・コッペリア",
+                "氷風組曲・コぺリウス",
+                "鉄甲熔炎帝王",
+                "実験用フィールド生成装置",
+                "千年真珠の海駿",
+                "水形タルパ",
+                "山隠れの猊獣",
+                "魔像レガトゥス",
+                "ホワライガ・ンゴウボウ",
+                "貪食のユムカ竜",
+                "秘源機兵・機巧デバイス",
+                "深遠なるミミックパピラ",
+                "迷える霊覚の修験者",
+                "輝ける溶岩の龍像",
+                "秘源機兵・統御デバイス"
+            ];
+            const currentPlayerNextPos = playerPositions[currentPlayer - 1] + 2;
+            const overlappingPlayerNextPos = playerPositions[overlappingPlayerIndex] + 1;
+            const goalIndex = squares.length - 1;
+            if (currentPlayerNextPos <= goalIndex && overlappingPlayerNextPos <= goalIndex && playerPositions[currentPlayer - 1] != 0 && playerPositions[overlappingPlayerIndex] != 0) {
+                // 二人ともゴールから2マス以内でなければ
+                const randomMessage = `${playerNames[overlappingPlayerIndex]}と遭遇！全員で` + messages[Math.floor(Math.random() * messages.length)] + "を倒してこよう！";
+
+                const confirmResult = confirm(`${randomMessage}\nOK:勝利！（2マス進む）\nキャンセル:何も起こらない`);
+                if (confirmResult) {
+                    playerPositions[currentPlayer - 1] = currentPlayerNextPos;
+                    updatePlayerPiecePosition(currentPlayer - 1);
+                    handleSquareEvent(currentPlayerNextPos); // 移動先のイベントを処理
+
+                    playerPositions[overlappingPlayerIndex] = overlappingPlayerNextPos;
+                    updatePlayerPiecePosition(overlappingPlayerIndex);
+
+                    eventMessageDisplay.textContent += `\n ${playerNames[currentPlayer - 1]}さんが2マス、${playerNames[overlappingPlayerIndex]}さんが1マス進みました。`;
+                } else {
+                    // キャンセルなら何も起こらない
+                    eventMessageDisplay.textContent += "\n何も起こりませんでした。";
+                }
+            }
+            else {
+                eventMessageDisplay.textContent += "\n遭遇しましたが、ゴール手前のため何も起こりません。";
+            }
+        // 他の特殊イベントもここに追加
     }
     }
 
