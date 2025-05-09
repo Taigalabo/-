@@ -80,7 +80,7 @@ document.addEventListener('DOMContentLoaded', () => {
             updatePlayerPiecePosition(i);
         }
         updateGameInfo();
-        eventMessageDisplay.textContent = "ゲーム開始！プレイヤー1の番です。";
+       eventMessageDisplay.textContent = `ゲーム開始！${playerNames[0]} (${currentPlayer}) の番です。`;
     }
 
     // サイコロを振る処理
@@ -210,7 +210,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // ゲーム情報を更新
     function updateGameInfo() {
-        currentPlayerDisplay.textContent = currentPlayer;
+        currentPlayerDisplay.textContent = `${playerNames[currentPlayer - 1]} (${currentPlayer})`;
     }
 
     // 初期状態ではサイコロボタンを無効化
