@@ -3,13 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>すごろくゲーム</title>
+    <title>原神同好会すごろくゲーム</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
-        <h1>すごろくゲーム</h1>
+        <h1>原神同好会すごろく</h1>
 
+        <div class="player-setup">
+            <h2>プレイヤー設定</h2>
+            <label for="num-players">プレイ人数 (1-4):</label>
+            <input type="number" id="num-players" min="1" max="4" value="4">
+            <button id="start-game-button">ゲーム開始</button>
+        </div>
+        
+　　　　<div class="player-setup">
+    <h2>プレイヤー設定</h2>
+    <label for="num-players">プレイヤー数 (1-4):</label>
+    <input type="number" id="num-players" value="1" min="1" max="4">
+    <div id="player-name-inputs">
+        <label for="player-1-name">プレイヤー1の名前:</label>
+        <input type="text" id="player-1-name" value="プレイヤー1"><br>
+    </div>
+    <button id="start-game-button">ゲーム開始</button>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const numPlayersInput = document.getElementById('num-players');
+    const playerNameInputsDiv = document.getElementById('player-name-inputs');
+
+    numPlayersInput.addEventListener('change', () => {
+        const numPlayers = parseInt(numPlayersInput.value);
+        let nameInputsHTML = '';
+        for (let i = 1; i <= numPlayers; i++) {
+            nameInputsHTML += `<label for="player-${i}-name">プレイヤー${i}の名前:</label>`;
+            nameInputsHTML += `<input type="text" id="player-${i}-name" value="プレイヤー${i}"><br>`;
+        }
+        playerNameInputsDiv.innerHTML = nameInputsHTML;
+    });
+});
+</script>
+        
         <div class="game-board-container">
             <img src="images/board.png" alt="すごろく盤面" id="game-board-img">
             </div>
@@ -25,12 +60,6 @@
         <div id="event-message" class="event-message">
             </div>
 
-        <div class="player-setup">
-            <h2>プレイヤー設定</h2>
-            <label for="num-players">プレイ人数 (1-4):</label>
-            <input type="number" id="num-players" min="1" max="4" value="4">
-            <button id="start-game-button">ゲーム開始</button>
-        </div>
     </div>
 
     <script src="script.js"></script>
