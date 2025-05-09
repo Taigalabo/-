@@ -121,7 +121,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // マスのイベント処理
     function handleSquareEvent(squareIndex) {
         const square = squares[squareIndex];
-        eventMessageDisplay.textContent = `プレイヤー${currentPlayer} (${playerNames[currentPlayer - 1]}) が${square.name}に止まりました。 ${square.event || ''}`;
+        eventMessageDisplay.textContent = `プレイヤー${currentPlayer} (${playerNames[currentPlayer - 1]}) が${square.name}に止まりました。 \n ${square.event || ''}`;
 
         const overlappingPlayerIndex = playerPositions.findIndex((pos, index) => index !== currentPlayer - 1 && pos === squareIndex);
 
@@ -177,7 +177,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     playerPositions[overlappingPlayerIndex] = overlappingPlayerNextPos;
                     updatePlayerPiecePosition(overlappingPlayerIndex);
 
-                    eventMessageDisplay.textContent += `\n${playerNames[currentPlayer - 1]}さんが2マス、${playerNames[overlappingPlayerIndex]}さんが1マス進みました。`;
+                    eventMessageDisplay.textContent += `\n ${playerNames[currentPlayer - 1]}さんが2マス、${playerNames[overlappingPlayerIndex]}さんが1マス進みました。`;
             } else {
                 // キャンセルなら何も起こらない
                 eventMessageDisplay.textContent += "\n何も起こりませんでした。";
