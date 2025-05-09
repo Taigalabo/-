@@ -138,7 +138,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 eventMessageDisplay.textContent += " 会心は出ませんでした。";
             }
         }
-        if (overlappingPlayerIndex !== -1000) {
+        if (overlappingPlayerIndex !== -1 && overlappingPlayerIndex !== -2) {
             const messages = [
         "純水精霊",
         "エンシェントヴィシャップ",
