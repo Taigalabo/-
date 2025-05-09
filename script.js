@@ -201,7 +201,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         // 他の特殊イベントもここに追加
     }
-    }
 
     // プレイヤーのコマの位置を更新
     function updatePlayerPiecePosition(playerIndex) {
