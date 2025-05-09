@@ -165,7 +165,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const currentPlayerNextPos = playerPositions[currentPlayer - 1] + 2;
             const overlappingPlayerNextPos = playerPositions[overlappingPlayerIndex] + 2;
             const goalIndex = squares.length - 1;
-            if (currentPlayerNextPos <= goalIndex && overlappingPlayerNextPos <= goalIndex) {
+            if (currentPlayerNextPos <= goalIndex && overlappingPlayerNextPos <= goalIndex && currentPlayerNextPos != 0) {
                     // 二人ともゴールから2マス以内でなければ
             const randomMessage = `${playerNames[overlappingPlayerIndex]}と遭遇！全員で` + messages[Math.floor(Math.random() * messages.length)] + "を倒してこよう！";
 
