@@ -164,7 +164,7 @@ document.addEventListener('DOMContentLoaded', () => {
             ];
             const randomMessage = `${playerNames[overlappingPlayerIndex]}と遭遇！全員で` + messages[Math.floor(Math.random() * messages.length)] + "を倒してこよう！";
 
-            const confirmResult = confirm(`${randomMessage}\nOK: 勝利（2マス進む）\nキャンセル: 敗北（何も起こらない）`);
+            const confirmResult = confirm(`${randomMessage}\nOK:勝利！（2マス進む）\nキャンセル:何も起こらない`);
 
             if (confirmResult) {
                 const currentPlayerNextPos = playerPositions[currentPlayer - 1] + 2;
