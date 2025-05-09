@@ -125,7 +125,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const overlappingPlayerIndex = playerPositions.findIndex((pos, index) => index !== currentPlayer - 1 && pos === squareIndex);
 
-        if (overlappingPlayerIndex !== -1) {
+        if (overlappingPlayerIndex !== -1000) {
             const messages = [
         "純水精霊",
         "エンシェントヴィシャップ",
