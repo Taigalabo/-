@@ -45,16 +45,27 @@ document.addEventListener('DOMContentLoaded', () => {
     startGameButton.addEventListener('click', () => {
         numPlayers = parseInt(numPlayersInput.value);
         if (numPlayers > 4) {
-            numPlayers = 4
+            numPlayers = 4;
         }
         if (numPlayers < 1) {
-            numPlayers = 1
+            numPlayers = 1;
         }
+
+        playerNames = []; // プレイヤー名を初期化
+        for (let i = 1; i <= numPlayers; i++) {
+            const nameInput = document.getElementById(`player-${i}-name`);
+            if (nameInput) {
+                playerNames.push(nameInput.value || `プレイヤー${i}`); // 名前が入力されていなければデフォルト名を使用
+            } else {
+                playerNames.push(`プレイヤー${i}`);
+            }
+        }
+
         initializeGame();
-        document.querySelector('.player-setup').style.display = 'none'; // 設定を非表示
+        document.querySelector('.player-setup').style.display = 'none';
         rollDiceButton.disabled = false;
     });
-
+    
     function initializeGame() {
         currentPlayer = 1;
         playerPositions = Array(numPlayers).fill(0); // 全員スタートマス
@@ -112,27 +123,43 @@ document.addEventListener('DOMContentLoaded', () => {
     // マスのイベント処理
     function handleSquareEvent(squareIndex) {
         const square = squares[squareIndex];
-        eventMessageDisplay.textContent = `プレイヤー${currentPlayer}が${square.name}に止まりました。 ${square.event || ''}`;
+        eventMessageDisplay.textContent = `プレイヤー${currentPlayer} (${playerNames[currentPlayer - 1]}) が${square.name}に止まりました。 ${square.event || ''}`;
 
-        if (square.special === "conditional_move") {
-            // ここで条件分岐のロジックを実装します。
-            // 例：「現在のキャラで通常攻撃を一発振り、会心だったら3マス進む」
-            // この例では簡略化のため、confirmダイアログで会心かどうかをユーザーに尋ねます。
-            // 実際のゲームでは、より複雑な条件判定が必要になる場合があります。
+        const overlappingPlayerIndex = playerPositions.findIndex((pos, index) => index !== currentPlayer - 1 && pos === squareIndex);
+
+        if (overlappingPlayerIndex !== -1) {
+            const messages = [
+                `${playerNames[overlappingPlayerIndex]}さんと遭遇！どうしますか？`,
+                `${playerNames[overlappingPlayerIndex]}さんが同じ場所にいる！何か起こる？`,
+                `${playerNames[overlappingPlayerIndex]}さんが先行しているぞ！行動を選択！`
+            ];
+            const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+
+            const confirmResult = confirm(`${randomMessage}\nOK: ${playerNames[overlappingPlayerIndex]}さんが2マス進む\nキャンセル: ${playerNames[currentPlayer - 1]} (${playerNames[currentPlayer - 1]}) が2マス進む`);
+
+            if (confirmResult) {
+                const nextPosition = Math.min(playerPositions[overlappingPlayerIndex] + 2, squares.length - 1);
+                playerPositions[overlappingPlayerIndex] = nextPosition;
+                updatePlayerPiecePosition(overlappingPlayerIndex);
+                eventMessageDisplay.textContent += `\n${playerNames[overlappingPlayerIndex]}さんが2マス進みました。`;
+                handleSquareEvent(nextPosition);
+            } else {
+                const nextPosition = Math.min(playerPositions[currentPlayer - 1] + 2, squares.length - 1);
+                playerPositions[currentPlayer - 1] = nextPosition;
+                updatePlayerPiecePosition(currentPlayer - 1);
+                eventMessageDisplay.textContent += `\n${playerNames[currentPlayer - 1]} (${playerNames[currentPlayer - 1]}) が2マス進みました。`;
+                handleSquareEvent(nextPosition);
+            }
+        } else if (square.special === "conditional_move") {
+            // (conditional_move の処理はそのまま)
             const criticalHit = confirm("会心が出ましたか？ (OK = はい / キャンセル = いいえ)");
             if (criticalHit) {
                 eventMessageDisplay.textContent += ` 会心が出た！${square.condition_value}マス進みます。`;
-                // 重要：この進む処理は、現在のmovePlayerのフローとは別で考慮する必要がある
-                // 今回は単純に現在のプレイヤーの位置を更新し、再度イベントをチェックする
                 let currentPositionIndex = playerPositions[currentPlayer - 1];
-                let newPositionIndex = currentPositionIndex + square.condition_value;
-
-                if (newPositionIndex >= squares.length - 1) {
-                    newPositionIndex = squares.length - 1;
-                }
+                let newPositionIndex = Math.min(currentPositionIndex + square.condition_value, squares.length - 1);
                 playerPositions[currentPlayer - 1] = newPositionIndex;
                 updatePlayerPiecePosition(currentPlayer - 1);
-                handleSquareEvent(newPositionIndex); // 移動先のイベントを再度処理
+                handleSquareEvent(newPositionIndex);
             } else {
                 eventMessageDisplay.textContent += " 会心は出ませんでした。";
             }
