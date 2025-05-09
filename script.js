@@ -17,9 +17,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // 注意: 各マスの座標 (x, y) は、画像に合わせて手動で調整する必要があります。
     // x は左からの割合 (0% - 100%)、 y は上からの割合 (0% - 100%)
     const squares = [
-        { name: "スタート（星落としの湖）", x: 9, y: 10, event: "ストーリー進捗、良く使う編成を教えて！" }, // 0
+        { name: "スタート（星落としの湖）", x: 9, y: 15, event: "ストーリー進捗、良く使う編成を教えて！" }, // 0
         { name: "モンド城", x: 9.8, y: 52, event: "一番好きな原神の国は？" }, // 1
-        { name: "風立ちの地", x: 10, y: 76, event: "好きな原神のマップ・景色は？" }, // 2
+        { name: "風立ちの地", x: 10, y: 85, event: "好きな原神のマップ・景色は？" }, // 2
         { name: "璃月港", x: 26.6, y: 85, event: "一番最初に引いた限定星5キャラは？" }, // 3
         { name: "層岩巨淵", x: 44.3, y: 85, event: "次に育てたいキャラは？" }, // 4
         { name: "翹英荘", x: 61.5, y: 85, event: "一番使っているキャラは？" }, // 5
@@ -111,12 +111,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
         playerPositions[currentPlayer - 1] = newPositionIndex;
         updatePlayerPiecePosition(currentPlayer - 1);
-        handleSquareEvent(newPositionIndex);
         updateGameInfo();
 
         // 次のプレイヤーへ
         currentPlayer = (currentPlayer % numPlayers) + 1;
         updateGameInfo(); // 次のプレイヤー情報を更新
+        handleSquareEvent(newPositionIndex);
     }
 
     // マスのイベント処理
@@ -149,7 +149,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         } else if (square.special === "conditional_move") {
             // (conditional_move の処理はそのまま)
-            const criticalHit = confirm("会心が出ましたか？ (OK = はい / キャンセル = いいえ)");
+            const criticalHit = confirm("ウェネトトンネル！会心は出た？ (OK = はい / キャンセル = いいえ)");
             if (criticalHit) {
                 eventMessageDisplay.textContent += ` 会心が出た！${square.condition_value}マス進みます。`;
                 let currentPositionIndex = playerPositions[currentPlayer - 1];
