@@ -199,6 +199,7 @@ document.addEventListener('DOMContentLoaded', () => {
             else {
                 eventMessageDisplay.textContent += "\n遭遇しましたが、ゴール手前のため何も起こりません。";
             }
+        }
         // 他の特殊イベントもここに追加
     }
 
