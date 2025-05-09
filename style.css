@@ -1,42 +1,56 @@
 body {
     font-family: sans-serif;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    flex-direction: column; /* 縦並びを基本に */
+    align-items: center; /* 中央揃え */
     min-height: 100vh;
     background-color: #f0f0f0;
     margin: 0;
+    padding: 10px; /* 全体に少しパディング */
+    box-sizing: border-box; /* paddingを含めて幅計算 */
 }
 
 .container {
     background-color: white;
-    padding: 20px;
+    padding: 15px; /* 少し小さく */
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     text-align: center;
+    width: 100%; /* 親要素いっぱいに広がる */
+    max-width: 800px; /* PC表示時の最大幅 */
+    box-sizing: border-box;
 }
 
 .game-board-container {
-    position: relative; /* コマを絶対位置で配置するため */
+    position: relative;
     margin-bottom: 20px;
-    width: 800px; /* 画像の幅に合わせて調整 */
-    height: auto; /* 画像の高さに合わせて調整 */
+    width: 100%; /* 親要素（.container）いっぱいに広がる */
+    max-width: 700px; /* ゲーム盤の最大幅（元の画像サイズに応じて調整） */
+    margin-left: auto;
+    margin-right: auto;
 }
 
 #game-board-img {
     width: 100%;
     height: auto;
     display: block;
+    border: 1px solid #ccc; /* 境界を明確に */
 }
 
 .player-piece {
     position: absolute;
-    width: 20px; /* コマのサイズ */
-    height: 20px; /* コマのサイズ */
+    /* コマのサイズを盤面のサイズに連動させる例 (vwはviewport width) */
+    /* または、メディアクエリでpx値を変更する */
+    width: 3vw;   /* 例: ビューポート幅の3% */
+    height: 3vw;  /* 例: ビューポート幅の3% */
+    max-width: 20px; /* PCでの最大サイズ */
+    max-height: 20px;/* PCでの最大サイズ */
+    min-width: 10px; /* スマホでの最小サイズ */
+    min-height: 10px;/* スマホでの最小サイズ */
     border-radius: 50%;
-    border: 2px solid black;
+    border: 1px solid black; /* 少し細く */
     box-sizing: border-box;
-    transition: left 0.5s ease, top 0.5s ease; /* 移動アニメーション */
+    transition: left 0.5s ease, top 0.5s ease, width 0.3s ease, height 0.3s ease; /* サイズ変更もアニメーション */
 }
 
 .player-1 { background-color: red; }
@@ -46,17 +60,18 @@ body {
 
 
 .controls {
-    margin-bottom: 20px;
+    margin-bottom: 15px;
 }
 
 .controls button {
     padding: 10px 15px;
-    font-size: 16px;
+    font-size: 1em; /* em単位で相対的に */
     cursor: pointer;
     background-color: #007bff;
     color: white;
     border: none;
     border-radius: 4px;
+    margin-top: 10px; /* ボタン周りの余白 */
 }
 
 .controls button:hover {
@@ -64,7 +79,8 @@ body {
 }
 
 #player-info p, .controls p {
-    margin: 5px 0;
+    margin: 8px 0; /* 少し広げる */
+    font-size: 0.9em;
 }
 
 .event-message {
@@ -72,8 +88,10 @@ body {
     padding: 10px;
     border: 1px solid #ddd;
     border-radius: 4px;
-    min-height: 40px;
+    min-height: 30px; /* 少し小さく */
     background-color: #e9ecef;
+    font-size: 0.9em;
+    word-wrap: break-word; /* 長いメッセージがはみ出ないように */
 }
 
 .player-setup {
@@ -83,21 +101,73 @@ body {
     border-radius: 4px;
 }
 
+.player-setup label,
+.player-setup input,
+.player-setup button {
+    display: block; /* 縦に並べる */
+    width: 80%;
+    margin: 8px auto; /* 中央揃え */
+    padding: 8px;
+    box-sizing: border-box;
+}
 .player-setup input {
-    margin-left: 5px;
-    padding: 5px;
+    text-align: center;
 }
 
 .player-setup button {
-    margin-left: 10px;
-    padding: 8px 12px;
     background-color: #28a745;
     color: white;
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    width: auto; /* ボタンの幅は内容に合わせる */
+    padding: 10px 20px;
 }
 
 .player-setup button:hover {
     background-color: #1e7e34;
+}
+
+/* スマートフォン向けのスタイル調整 (例: 画面幅が600px以下の場合) */
+@media (max-width: 600px) {
+    .container {
+        padding: 10px;
+    }
+
+    #player-info p, .controls p, .event-message {
+        font-size: 0.8em;
+    }
+
+    .controls button {
+        font-size: 0.9em;
+        padding: 8px 12px;
+    }
+
+    /* コマのサイズを小さくする場合 (px指定の例) */
+    /*
+    .player-piece {
+        width: 15px;
+        height: 15px;
+    }
+    */
+
+    .player-setup label,
+    .player-setup input,
+    .player-setup button {
+        width: 90%;
+        font-size: 0.9em;
+    }
+}
+
+@media (max-width: 400px) {
+    #player-info p, .controls p, .event-message {
+        font-size: 0.75em;
+    }
+    /* さらに小さい画面用の調整 */
+    .player-piece {
+        width: 4vw;
+        height: 4vw;
+        min-width: 8px;
+        min-height: 8px;
+    }
 }
