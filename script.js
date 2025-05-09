@@ -117,7 +117,6 @@ document.addEventListener('DOMContentLoaded', () => {
         // 次のプレイヤーへ
         currentPlayer = (currentPlayer % numPlayers) + 1;
         updateGameInfo(); // 次のプレイヤー情報を更新
-        eventMessageDisplay.textContent += ` 次はプレイヤー${currentPlayer}の番です。`;
     }
 
     // マスのイベント処理
