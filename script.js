@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
         { name: "風立ちの地", x: 10, y: 76, event: "好きな原神のマップ・景色は？" }, // 2
         { name: "璃月港", x: 26.6, y: 85, event: "一番最初に引いた限定星5キャラは？" }, // 3
         { name: "層岩巨淵", x: 44.3, y: 85, event: "次に育てたいキャラは？" }, // 4
-        { name: "ぎょうえいそう", x: 61.5, y: 85, event: "一番使っているキャラは？" }, // 5
+        { name: "翹英荘", x: 61.5, y: 85, event: "一番使っているキャラは？" }, // 5
         { name: "望舒旅館", x: 80, y: 85, event: "あなたの推しについて教えて！" }, // 6
         { name: "稲妻城", x: 93, y: 85, event: "好きor嫌いな原神のボスは？"}, // 7
         { name: "鳴神大社", x: 93, y: 53, event: "好きな爆発のカットインは？" }, // 8
@@ -36,8 +36,8 @@ document.addEventListener('DOMContentLoaded', () => {
         { name: "フォンテーヌ廷", x: 26, y: 63.9, event: "「一番使っているキャラは？」" }, // 15
         { name: "ペトリコール", x: 43, y: 63.9, event: "他にハマっているゲームは？" }, // 16
         { name: "こだまの子", x: 43, y: 37, event: "「あなたの推しについて教えて！」" }, // 17
-        { name: "りゅうせんのしゅう", x: 60, y: 37, event: "自慢の聖遺物があれば見せてください！" }, // 18
-        { name: "かがりぎのたみ", x: 60, y: 63.9, event: "神の目が貰えるなら何元素がいい？" }, // 19
+        { name: "流泉の衆", x: 60, y: 37, event: "自慢の聖遺物があれば見せてください！" }, // 18
+        { name: "懸木の民", x: 60, y: 63.9, event: "神の目が貰えるなら何元素がいい？" }, // 19
         { name: "ゴール（メロピデ要塞）", x: 80.7, y: 57.4, event: "ゴール！おめでとう！", goal: true } // 20
         // ... 他のマスも同様に追加
     ];
@@ -45,9 +45,11 @@ document.addEventListener('DOMContentLoaded', () => {
     // ゲーム開始処理
     startGameButton.addEventListener('click', () => {
         numPlayers = parseInt(numPlayersInput.value);
-        if (numPlayers < 1 || numPlayers > 4) {
-            alert("プレイヤー人数は1人から4人で設定してください。");
-            return;
+        if (numPlayers > 4) {
+            numPlayers = 4
+        }
+        if (numPlayers < 1) {
+            numPlayers = 1
         }
         initializeGame();
         document.querySelector('.player-setup').style.display = 'none'; // 設定を非表示
