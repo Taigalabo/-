@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let numPlayers = 1;
     let currentPlayer = 1;
+    let evented = 0
     let playerPositions = []; // 各プレイヤーの現在のマス番号
     let playerPieces = []; // 各プレイヤーのコマのDOM要素
 
@@ -85,9 +86,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // サイコロを振る処理
     rollDiceButton.addEventListener('click', () => {
-        const diceRoll = Math.floor(Math.random() * 10) + 1;
+        const diceRoll = Math.floor(Math.random() * 8) + 1;
         diceResultDisplay.textContent = diceRoll;
-
+        evented = 0;
         movePlayer(diceRoll);
     });
 
@@ -182,6 +183,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const randomMessage = `${playerNames[overlappingPlayerIndex]}と遭遇！全員で` + messages[Math.floor(Math.random() * messages.length)] + "を倒してこよう！";
 
                 const confirmResult = confirm(`${randomMessage}\nOK:勝利！（2マス進む）\nキャンセル:何も起こらない`);
+                evented = 1;
                 if (confirmResult) {
                     playerPositions[currentPlayer - 1] = currentPlayerNextPos;
                     updatePlayerPiecePosition(currentPlayer - 1);
