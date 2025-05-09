@@ -4,7 +4,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const rollDiceButton = document.getElementById('roll-dice-button');
     const diceResultDisplay = document.getElementById('dice-result');
     const currentPlayerDisplay = document.getElementById('current-player');
-    const currentPositionDisplay = document.getElementById('current-position');
     const eventMessageDisplay = document.getElementById('event-message');
     const numPlayersInput = document.getElementById('num-players');
     const startGameButton = document.getElementById('start-game-button');
@@ -185,11 +184,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // ゲーム情報を更新
     function updateGameInfo() {
         currentPlayerDisplay.textContent = currentPlayer;
-        if (playerPositions[currentPlayer - 1] !== undefined && squares[playerPositions[currentPlayer - 1]]) {
-            currentPositionDisplay.textContent = squares[playerPositions[currentPlayer - 1]].name;
-        } else if (playerPositions[currentPlayer-1] === 0) {
-            currentPositionDisplay.textContent = squares[0].name;
-        }
     }
 
     // 初期状態ではサイコロボタンを無効化
