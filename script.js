@@ -102,7 +102,7 @@ document.addEventListener('DOMContentLoaded', () => {
             playerPositions[currentPlayer - 1] = newPositionIndex;
             updatePlayerPiecePosition(currentPlayer - 1);
             updateGameInfo();
-            eventMessageDisplay.textContent = `プレイヤー${currentPlayer}が${squares[newPositionIndex].name}に到着！「${squares[newPositionIndex].event}」`;
+            eventMessageDisplay.textContent = `プレイヤー${currentPlayer}が${squares[newPositionIndex].name}に到着！${squares[newPositionIndex].event}`;
             rollDiceButton.disabled = true; // ゲーム終了
             alert(`プレイヤー${currentPlayer}の勝利です！おめでとうございます！`);
             // ここでゲーム終了後の処理（例：リセットボタン表示など）を追加できます
@@ -121,7 +121,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // マスのイベント処理
     function handleSquareEvent(squareIndex) {
         const square = squares[squareIndex];
-        eventMessageDisplay.textContent = `プレイヤー${currentPlayer} (${playerNames[currentPlayer - 1]}) が${square.name}に止まりました。 \n ${square.event || ''}`;
+        eventMessageDisplay.textContent = `プレイヤー${currentPlayer} (${playerNames[currentPlayer - 1]}) が${square.name}に止まりました。 \n 「${square.event || ''}」`;
 
         const overlappingPlayerIndex = playerPositions.findIndex((pos, index) => index !== currentPlayer - 1 && pos === squareIndex);
 
