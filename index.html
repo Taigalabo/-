@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>すごろくゲーム</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>すごろくゲーム</h1>
+
+        <div class="game-board-container">
+            <img src="images/board.jpg" alt="すごろく盤面" id="game-board-img">
+            </div>
+
+        <div class="controls">
+            <div id="player-info">
+                <p>現在のプレイヤー: <span id="current-player">1</span></p>
+                <p>現在の位置: <span id="current-position">スタート</span></p>
+            </div>
+            <button id="roll-dice-button">サイコロを振る</button>
+            <p>出た目: <span id="dice-result">-</span></p>
+        </div>
+
+        <div id="event-message" class="event-message">
+            </div>
+
+        <div class="player-setup">
+            <h2>プレイヤー設定</h2>
+            <label for="num-players">プレイ人数 (1-4):</label>
+            <input type="number" id="num-players" min="1" max="4" value="1">
+            <button id="start-game-button">ゲーム開始</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
