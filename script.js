@@ -178,7 +178,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 "秘源機兵・統御デバイス"
             ];
             const currentPlayerNextPos = playerPositions[currentPlayer - 1] + 2;
-            const overlappingPlayerNextPos = playerPositions[overlappingPlayerIndex] + 1;
+            const overlappingPlayerNextPos = playerPositions[overlappingPlayerIndex] + 2;
             const goalIndex = squares.length - 1;
             if (currentPlayerNextPos <= goalIndex && overlappingPlayerNextPos <= goalIndex && playerPositions[currentPlayer - 1] != 0 && playerPositions[overlappingPlayerIndex] != 0) {
                 // 二人ともゴールから2マス以内でなければ
