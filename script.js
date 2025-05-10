@@ -86,7 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // サイコロを振る処理
     rollDiceButton.addEventListener('click', () => {
-        const diceRoll = Math.floor(Math.random() * 6) + 1;
+        const diceRoll = Math.floor(Math.random() * 9) + 1;
         diceResultDisplay.textContent = diceRoll;
         evented = 0;
         movePlayer(diceRoll);
