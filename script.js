@@ -86,7 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // サイコロを振る処理
     rollDiceButton.addEventListener('click', () => {
-        const diceRoll = Math.floor(Math.random() * 8) + 1;
+        const diceRoll = Math.floor(Math.random() * 6) + 1;
         diceResultDisplay.textContent = diceRoll;
         evented = 0;
         movePlayer(diceRoll);
@@ -193,7 +193,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     playerPositions[overlappingPlayerIndex] = overlappingPlayerNextPos;
                     updatePlayerPiecePosition(overlappingPlayerIndex);
 
-                    eventMessageDisplay.textContent += `\n ${playerNames[currentPlayer - 1]}さんが2マス、${playerNames[overlappingPlayerIndex]}さんが1マス進みました。`;
+                    eventMessageDisplay.textContent += `\n ${playerNames[currentPlayer - 1]}と${playerNames[overlappingPlayerIndex]}が2マス進みました。`;
                 } else {
                     // キャンセルなら何も起こらない
                     eventMessageDisplay.textContent += "\n何も起こりませんでした。";
