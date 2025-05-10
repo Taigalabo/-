@@ -126,6 +126,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const overlappingPlayerIndex = playerPositions.findIndex((pos, index) => index !== currentPlayer - 1 && pos === squareIndex);
         if (square.special === "conditional_move") {
+            evented = 1;
             // (conditional_move の処理はそのまま)
             const criticalHit = confirm("ウェネトトンネル！会心が出ましたか？ (OK = はい / キャンセル = いいえ)");
             if (criticalHit) {
@@ -139,7 +140,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 eventMessageDisplay.textContent += " 会心は出ませんでした。";
             }
         }
-        if (overlappingPlayerIndex !== -1) {
+        if (overlappingPlayerIndex !== -1 && evented == 0) {
+            evented = 1;
             const messages = [
                 "純水精霊",
                 "エンシェントヴィシャップ",
@@ -183,7 +185,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 const randomMessage = `${playerNames[overlappingPlayerIndex]}と遭遇！全員で` + messages[Math.floor(Math.random() * messages.length)] + "を倒してこよう！";
 
                 const confirmResult = confirm(`${randomMessage}\nOK:勝利！（2マス進む）\nキャンセル:何も起こらない`);
-                evented = 1;
                 if (confirmResult) {
                     playerPositions[currentPlayer - 1] = currentPlayerNextPos;
                     updatePlayerPiecePosition(currentPlayer - 1);
