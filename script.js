@@ -82,7 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
             updatePlayerPiecePosition(i);
         }
         updateGameInfo();
-       eventMessageDisplay.textContent = `ゲーム開始！${playerNames[0]} (${currentPlayer}) の番です。`;
+       eventMessageDisplay.textContent = `${playerNames[0]} (${currentPlayer}) の番！「ストーリー進捗、良く使う編成を教えて！」`;
     }
 
     // サイコロを振る処理
@@ -261,3 +261,4 @@ document.addEventListener('DOMContentLoaded', () => {
     // 初期状態ではサイコロボタンを無効化
     rollDiceButton.disabled = true;
 });
+！
