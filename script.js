@@ -81,7 +81,7 @@ document.addEventListener('DOMContentLoaded', () => {
             updatePlayerPiecePosition(i);
         }
         updateGameInfo();
-       eventMessageDisplay.textContent = `まずは全員、ストーリー進捗、良く使う編成を教えて！`;
+       eventMessageDisplay.textContent = `まずは全員、ストーリー進捗・よく使う編成を教えて！`;
     }
 
     // サイコロを振る処理
