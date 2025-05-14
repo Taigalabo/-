@@ -255,4 +255,3 @@ document.addEventListener('DOMContentLoaded', () => {
     // 初期状態ではサイコロボタンを無効化
     rollDiceButton.disabled = true;
 });
-！
