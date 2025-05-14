@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let evented = 0
     let playerPositions = []; // 各プレイヤーの現在のマス番号
     let playerPieces = []; // 各プレイヤーのコマのDOM要素
+    let start = 0;
 
     // すごろくのマス定義 (座標とイベント)
     // 注意: 各マスの座標 (x, y) は、画像に合わせて手動で調整する必要があります。
@@ -87,6 +88,11 @@ document.addEventListener('DOMContentLoaded', () => {
     // サイコロを振る処理
     rollDiceButton.addEventListener('click', () => {
         const diceRoll = Math.floor(Math.random() * 9) + 1;
+        if(start <= 3)
+        {
+            start += 1;
+            diceRoll = 0;
+        }
         diceResultDisplay.textContent = diceRoll;
         evented = 0;
         movePlayer(diceRoll);
